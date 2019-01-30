@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kiiotory/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kiiotory/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kiiotory/multi-client ./client
+  - docker build -t kiiotory/multi-nginx ./nginx
+  - docker build -t kiiotory/multi-server ./sever
+  - docker build -t kiiotory/multi-worker ./worker
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push -t kiiotory/multi-client
+  - docker push -t kiiotory/multi-nginx
+  - docker push -t kiiotory/multi-server
+  - docker push -t kiiotory/multi-worker
