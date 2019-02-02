@@ -16,7 +16,7 @@ after_success:
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   # Take those images and push them to docker hub
-  - docker push -t kiiotory/multi-client
-  - docker push -t kiiotory/multi-nginx
-  - docker push -t kiiotory/multi-server
-  - docker push -t kiiotory/multi-worker
+  - docker push  kiiotory/multi-client
+  - docker push  kiiotory/multi-nginx
+  - docker push  kiiotory/multi-server
+  - docker push  kiiotory/multi-worker
