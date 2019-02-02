@@ -11,7 +11,7 @@ script:
 after_success:
   - docker build -t kiiotory/multi-client ./client
   - docker build -t kiiotory/multi-nginx ./nginx
-  - docker build -t kiiotory/multi-server ./sever
+  - docker build -t kiiotory/multi-server ./server
   - docker build -t kiiotory/multi-worker ./worker
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
